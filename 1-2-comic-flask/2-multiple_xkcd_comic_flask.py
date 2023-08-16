@@ -18,7 +18,7 @@ def hello():
     start = time.perf_counter()
     url = get_xkcd_image()
     end = time.perf_counter()
-    return render_template('index.html', end = end, start = start, url = [url])
+    return render_template('index.html', end = end, start = start, urls = [url])
 
 if __name__ == '__main__':
     app.run(debug=True, port=5555)

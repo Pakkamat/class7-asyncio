@@ -4,11 +4,11 @@ import asyncio
 import aiohttp, aiofiles
 from PIL import Image
 
-uunsplash_search_url = "https://source.unsplash.com/random/300x300"
+unsplash_search_url = "https://source.unsplash.com/random/300x300"
 
 async def download_image_async(session: aiohttp.ClientSession, num: int = 1):
     print(f"(time.ctime()] - Start download image (num)")
-    async with session.get (uunsplash_search_url) as response:
+    async with session.get (unsplash_search_url) as response:
         if response.status == 200:
             image_buffer = await response. read()
             img = Image.open(io.BytesI0(image_buffer))
@@ -17,11 +17,13 @@ async def download_image_async(session: aiohttp.ClientSession, num: int = 1):
     async with aiofiles.open(f'./filename(num).jpg', "wb") as new_file:
         print(f"(time.ctime()] - Writing to'filename(num).jpg'...")
         await new_file.write(image_buffer)
+
 async def download_images_async(n: int = 10):
     async with aiohttp.ClientSession() as session:
         tasks = [download_image_async(session, i + 1) for i in range(n)]
         _= await asyncio.gather(*tasks)
     return
+
 if __name__ == "_ main_":
     tick = time.perf_counter()
     asyncio. run(download_images_async())
