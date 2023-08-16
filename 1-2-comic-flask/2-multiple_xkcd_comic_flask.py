@@ -16,9 +16,9 @@ def get_multiple_images(number):
 @app.get('/comic')
 def hello():
     start = time.perf_counter()
-    url = get_xkcd_image()
+    urls = get_multiple_images(10)
     end = time.perf_counter()
-    return render_template('index.html', end = end, start = start, urls = [url])
+    return render_template('index.html', end = end, start = start, urls = urls)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5555)
